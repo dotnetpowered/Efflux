@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Efflux.Storage", "Efflux.Storage\Efflux.Storage.csproj", "{4A0DC5FD-430D-44D8-8C10-6B7C28C1EACD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Efflux", "Efflux\Efflux.csproj", "{59B6AA95-D8C2-4BDC-AAD5-419095C04C10}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A0DC5FD-430D-44D8-8C10-6B7C28C1EACD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A0DC5FD-430D-44D8-8C10-6B7C28C1EACD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A0DC5FD-430D-44D8-8C10-6B7C28C1EACD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A0DC5FD-430D-44D8-8C10-6B7C28C1EACD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59B6AA95-D8C2-4BDC-AAD5-419095C04C10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59B6AA95-D8C2-4BDC-AAD5-419095C04C10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59B6AA95-D8C2-4BDC-AAD5-419095C04C10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59B6AA95-D8C2-4BDC-AAD5-419095C04C10}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
