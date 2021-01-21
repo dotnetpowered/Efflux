@@ -15,7 +15,7 @@ namespace Efflux.Samples.FileSystem
                 .AddLogging(loggingBuilder =>
                 {
                     loggingBuilder.AddConsole(options => {
-                        options.Format = ConsoleLoggerFormat.Systemd;
+                        options.FormatterName = ConsoleFormatterNames.Systemd;
                     });
                 })
                 .AddTransient<ITopicFactory, TopicStreamFactory>()
