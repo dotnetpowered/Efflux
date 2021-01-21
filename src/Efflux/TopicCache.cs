@@ -20,7 +20,7 @@ namespace Efflux
             _logger.LogInformation($"Open stream {topicName}");
             return cache.GetOrAdd(topicName, (key) =>
                         {
-                            return topicFactory.OpenTopic(_logger, key);
+                            return topicFactory.OpenTopic(key);
                         });
         }
 
@@ -29,7 +29,7 @@ namespace Efflux
             _logger.LogInformation($"Open stream {topicName}");
             return new TypedTopic<T>(cache.GetOrAdd(topicName, (key) =>
             {
-                return topicFactory.OpenTopic(_logger, key);
+                return topicFactory.OpenTopic(key);
             }));
         }
     }

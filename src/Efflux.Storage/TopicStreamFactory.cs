@@ -5,11 +5,14 @@ namespace Efflux.Stream
 {
     public class TopicStreamFactory : ITopicFactory
     {
-        public TopicStreamFactory()
+        private readonly ILogger logger;
+
+        public TopicStreamFactory(ILogger logger)
         {
+            this.logger = logger;
         }
 
-        public ITopic OpenTopic(ILogger logger, string TopicName)
+        public ITopic OpenTopic(string TopicName)
         {
             var result = TopicStream.OpenAsync(logger, TopicName, //new LiteDbTopicIndex());
                 new TopicIndexWithLog(new LiteDbTopicIndex(), logger));

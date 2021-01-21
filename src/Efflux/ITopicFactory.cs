@@ -1,10 +1,15 @@
-﻿using System;
-using Microsoft.Extensions.Logging;
-
-namespace Efflux
+﻿namespace Efflux
 {
     public interface ITopicFactory
     {
-        ITopic OpenTopic(ILogger logger, string TopicName);
+        ITopic OpenTopic(string TopicName);
+    }
+
+    public static class TypedTopicFactory
+    {
+        public static TypedTopic<T> OpenTopic<T>(this ITopicFactory topicFactory, string TopicName) where T : class
+        {
+            return new TypedTopic<T>(topicFactory.OpenTopic(TopicName));
+        }
     }
 }
