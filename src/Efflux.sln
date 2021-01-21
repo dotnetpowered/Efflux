@@ -5,6 +5,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Efflux.Storage", "Efflux.St
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Efflux", "Efflux\Efflux.csproj", "{59B6AA95-D8C2-4BDC-AAD5-419095C04C10}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Efflux.Samples.FileSystem", "..\samples\Efflux.Samples.FileSystem\Efflux.Samples.FileSystem.csproj", "{41EC609B-5A29-4593-AE2F-319E12CFC52B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Efflux.Samples.TypedDocument", "..\samples\Efflux.Samples.TypedDocument\Efflux.Samples.TypedDocument.csproj", "{6B902775-34F6-44F5-92A6-0FC181C55343}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,5 +23,13 @@ Global
 		{59B6AA95-D8C2-4BDC-AAD5-419095C04C10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59B6AA95-D8C2-4BDC-AAD5-419095C04C10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59B6AA95-D8C2-4BDC-AAD5-419095C04C10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41EC609B-5A29-4593-AE2F-319E12CFC52B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41EC609B-5A29-4593-AE2F-319E12CFC52B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41EC609B-5A29-4593-AE2F-319E12CFC52B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41EC609B-5A29-4593-AE2F-319E12CFC52B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B902775-34F6-44F5-92A6-0FC181C55343}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B902775-34F6-44F5-92A6-0FC181C55343}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B902775-34F6-44F5-92A6-0FC181C55343}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B902775-34F6-44F5-92A6-0FC181C55343}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
