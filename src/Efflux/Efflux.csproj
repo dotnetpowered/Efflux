@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
-    <PackageReference Include="MimeMapping" Version="1.0.1.30" />
+    <PackageReference Include="MimeMapping" Version="1.0.1.35" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
