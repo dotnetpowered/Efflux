@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <PackOnBuild>true</PackOnBuild>
+    <PackageId>Efflux</PackageId>
+    <PackageVersion>0.1</PackageVersion>
+    <Authors>Brian Ritchie</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/dotnetpowered/Efflux</PackageProjectUrl>
+    <Description>Stream storage and processing framework</Description>
+    <Copyright>Copyright © Brian Ritchie</Copyright>
   </PropertyGroup>
 
   <ItemGroup>

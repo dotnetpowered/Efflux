@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <PackOnBuild>true</PackOnBuild>
+    <PackageId>Efflux.Storage</PackageId>
+    <PackageVersion>0.1</PackageVersion>
+    <Authors>Brian Ritchie</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/dotnetpowered/Efflux</PackageProjectUrl>
+    <Copyright>Copyright © Brian Ritchie</Copyright>
+    <Description>Efflux storage implementation using Microsfot.FASTER and LiteDB</Description>
   </PropertyGroup>
 
   <ItemGroup>
