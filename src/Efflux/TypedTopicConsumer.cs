@@ -34,6 +34,6 @@ namespace Efflux
             return result;
         }
 
-        IAsyncEnumerator<T> IAsyncEnumerable<T>.GetAsyncEnumerator(CancellationToken cancellationToken = default) => new TopicEnumerator<T>(consumer);
+        IAsyncEnumerator<T> IAsyncEnumerable<T>.GetAsyncEnumerator(CancellationToken cancellationToken) => new TopicEnumerator<T>(consumer);
     }
 }
