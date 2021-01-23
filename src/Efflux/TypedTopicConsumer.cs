@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Efflux
 {
-    public class TypedTopicConsumer<T> : IAsyncEnumerable<T> where T : class
+    public class TypedTopicConsumer<T> : IAsyncEnumerable<T>, ITopicConsumer where T : class
     {
         readonly ITopicConsumer consumer;
 
@@ -25,15 +25,22 @@ namespace Efflux
         public async Task<MessageReadResult<T>> ReadAsync(bool autoCommit = false)
         {
             var readResult = await consumer.ReadMessageAsync(autoCommit);
-            var result = new MessageReadResult<T>();
-            result.MessageData = readResult.Message.PayloadAs<T>();
-            result.MetaData = readResult.Message.MetaData;
-            result.EndOfStream = readResult.EndOfStream;
-            result.NextMessageOffset = readResult.NextMessageOffset;
-            result.Ticket = readResult.Ticket;
+            var result = new MessageReadResult<T>
+            {
+                MessageData = readResult.Message.PayloadAs<T>(),
+                MetaData = readResult.Message.MetaData,
+                EndOfStream = readResult.EndOfStream,
+                NextMessageOffset = readResult.NextMessageOffset,
+                Ticket = readResult.Ticket
+            };
             return result;
         }
 
         IAsyncEnumerator<T> IAsyncEnumerable<T>.GetAsyncEnumerator(CancellationToken cancellationToken) => new TopicEnumerator<T>(consumer);
+
+        Task<MessageReadResult> ITopicConsumer.ReadMessageAsync(bool autoCommit)
+        {
+            return consumer.ReadMessageAsync(autoCommit);
+        }
     }
 }

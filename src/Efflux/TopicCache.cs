@@ -5,9 +5,9 @@ namespace Efflux
 {
     public class TopicCache
     {
-        ConcurrentDictionary<string, ITopic> cache = new ConcurrentDictionary<string, ITopic>();
+        private readonly ConcurrentDictionary<string, ITopic> cache = new();
         private readonly ILogger<TopicCache> _logger;
-        readonly ITopicFactory topicFactory;
+        private readonly ITopicFactory topicFactory;
 
         public TopicCache(ILogger<TopicCache> logger, ITopicFactory topicFactory)
         {

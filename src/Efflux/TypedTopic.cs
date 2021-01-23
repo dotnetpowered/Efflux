@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Efflux
 {
-    public class TypedTopic<T> where T : class
+    public class TypedTopic<T> : ITopic where T : class
     {
         readonly ITopic topic;
 
@@ -36,6 +36,26 @@ namespace Efflux
             var bytes = Encoding.UTF8.GetBytes(data);
             var message = new EffluxMessage(bytes, "JSON");
             return topic.WriteMessageAsync(message);
+        }
+
+        Task<ITopicConsumer> ITopic.CreateConsumerAsync(string ConsumerName, long startOffset)
+        {
+            return topic.CreateConsumerAsync(ConsumerName, startOffset);
+        }
+
+        Task<MessageReadResult> ITopic.ReadMessageAsync(long offset)
+        {
+            return topic.ReadMessageAsync(offset);
+        }
+
+        Task<long> ITopic.WriteMessageAsync(EffluxMessage message)
+        {
+            return topic.WriteMessageAsync(message);
+        }
+
+        Task<EffluxMessage> ITopic.FindByIdAsync(string id, bool consumeMessage)
+        {
+            return topic.FindByIdAsync(id, consumeMessage);
         }
     }
 }

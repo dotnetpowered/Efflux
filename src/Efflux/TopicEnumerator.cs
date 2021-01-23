@@ -9,7 +9,7 @@ namespace Efflux
 {
     public class TopicEnumerator<T> : IAsyncEnumerator<T> where T:class
     {
-        ITopicConsumer consumer;
+        readonly ITopicConsumer consumer;
 
         public TopicEnumerator(ITopicConsumer consumer)
         {

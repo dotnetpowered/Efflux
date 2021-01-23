@@ -1,8 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using Microsoft.Extensions.Logging;
-using FASTER.core;
 using System.Threading.Tasks;
 
 namespace Efflux.Stream
@@ -22,10 +20,14 @@ namespace Efflux.Stream
         public static async Task<TopicStream> OpenAsync(
                 ILogger logger, string topicName, ITopicIndex topicIndex)
         {
-            Console.WriteLine($"Open {topicName}");
             if (!Directory.Exists(topicName))
             {
+                logger.LogInformation($"Open new topic: {topicName}");
                 Directory.CreateDirectory(topicName);
+            }
+            else
+            {
+                logger.LogInformation($"Open topic: {topicName}");
             }
 
             var topic = new TopicStream(logger, topicName, topicIndex);

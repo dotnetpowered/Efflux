@@ -7,7 +7,7 @@ namespace Efflux.Stream
     {
         private readonly ILogger logger;
 
-        public TopicStreamFactory(ILogger logger)
+        public TopicStreamFactory(ILogger<TopicStreamFactory> logger)
         {
             this.logger = logger;
         }
