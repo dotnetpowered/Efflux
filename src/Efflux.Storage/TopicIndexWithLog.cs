@@ -33,6 +33,15 @@ namespace Efflux.Stream
             topicIndex.AddConsumer(consumer);
         }
 
+        public void UpdateConsumer(TopicConsumerTracker consumer)
+        {
+            var logEntry = new LogEntry<TopicConsumerTracker> { Action = "UpdateConsumer", Data = consumer };
+            var message = EffluxMessage.From(logEntry);
+            var task = topicIndexLog.WriteMessageAsync(message);
+            task.Wait();
+            topicIndex.UpdateConsumer(consumer);
+        }
+
         public void AddTicket(CommitTicket ticket)
         {
             var logEntry = new LogEntry<CommitTicket> { Action = "AddTicket", Data = ticket };

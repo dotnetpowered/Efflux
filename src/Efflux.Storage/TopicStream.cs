@@ -119,13 +119,13 @@ namespace Efflux.Stream
                 topicIndex.AddConsumer(consumerTracker);
 
             }
-
-            if (log.RecoveredIterators != null && log.RecoveredIterators.TryGetValue(ConsumerName, out long recoveredOffset))
+            else
             {
-                startOffset = recoveredOffset;
-                _logger.LogInformation($"[{TopicName}.{ConsumerName}] Recovered consumer with offset = {recoveredOffset}");
+                startOffset = consumerTracker.CurrentOffset;
+                _logger.LogInformation($"[{TopicName}.{ConsumerName}] Recovered consumer with offset = {startOffset}");
             }
-            var iter = log.Scan(startOffset, long.MaxValue, name: ConsumerName);
+
+            var iter = log.Scan(startOffset, long.MaxValue); 
             consumerTracker.CurrentOffset = iter.NextAddress;
 
             var consumer = new TopicStreamConsumer(this, consumerTracker, topicIndex, iter);

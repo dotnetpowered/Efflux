@@ -55,12 +55,14 @@ namespace Efflux.Stream
                 PriorRecord = new EffluxMessage("Root");
                 var buffer1 = PriorRecord.ToBytes().ToArray();
                 log.Enqueue(buffer1);
-                log.Commit();
+                await log.CommitAsync();
             }
             else
             {
-                var offset = log.CommittedBeginAddress;
+                var offset = log.CommittedUntilAddress;
                 _logger.LogInformation($"[{LogFilename}] Resuming log at {offset}");
+
+                // TODO: Fix reading of prior record
                 var result = await log.ReadAsync(offset);
                 PriorRecord = new EffluxMessage(result.Item1);
             }

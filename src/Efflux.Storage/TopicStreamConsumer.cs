@@ -14,23 +14,23 @@ namespace Efflux.Stream
             FasterLogScanIterator fasterLogScanIterator)
         {
             this.Id = tracker.Id;
-            this.CurrentOffset = tracker.CurrentOffset;
             this.Name = tracker.Name;
             this.StartOffset = tracker.StartOffset;
             this.Topic = topicStream;
             this.TopicIndex = topicIndex;
             this.iter = fasterLogScanIterator;
+            this.Tracker = tracker;
         }
 
         private TopicStream Topic { get; set; }
         private FasterLogScanIterator iter { get; set; }
         private ITopicIndex TopicIndex { get; set; }
+        private TopicConsumerTracker Tracker { get; set; }
 
         public Guid Id { get; private set; }
         public string Name { get; private set; }
         public long StartOffset { get; private set; }
-        public long CurrentOffset { get; internal set; }
-
+        public long CurrentOffset => Tracker.CurrentOffset;
 
         public bool Commit(string ticketId)
         {
@@ -122,8 +122,6 @@ namespace Efflux.Stream
                             EndOfStream = true
                         };
                     }
-                    iter.CompleteUntil(nextAddress);
-                    await this.Topic.log.CommitAsync();
                 }
                 else
                 {
@@ -136,7 +134,7 @@ namespace Efflux.Stream
 
             if (!readResult.EndOfStream)
             {
-                CurrentOffset = readResult.NextMessageOffset;
+                Tracker.CurrentOffset = readResult.NextMessageOffset;
                 if (deleteTicketId != null)
                     TopicIndex.DeleteTicket(deleteTicketId);
                 if (!autoCommit)
@@ -144,11 +142,8 @@ namespace Efflux.Stream
                     TopicIndex.AddTicket(ticket);
                     readResult.Ticket = ticket;
                 }
-                //Do not need to update DB as the log keeps track of this via
-                // the iter.CompleteUtil and CommitAsync calls above.
-                //Topic.consumers.Update(this);
+                Topic.topicIndex.UpdateConsumer(this.Tracker);
             }
-
 
             return readResult;
         }

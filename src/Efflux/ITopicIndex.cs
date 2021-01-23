@@ -4,6 +4,7 @@
     {
         ITopicIndex Open(string topicName);
         void AddConsumer(TopicConsumerTracker consumer);
+        void UpdateConsumer(TopicConsumerTracker consumer);
         void AddTicket(CommitTicket ticket);
         bool DeleteTicket(string ticketId);
         IndexedMessageMetaData FindMessage(string id);

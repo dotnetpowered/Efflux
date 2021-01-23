@@ -52,6 +52,11 @@ namespace Efflux.Stream
             consumers.Insert(consumer);
         }
 
+        public void UpdateConsumer(TopicConsumerTracker consumer)
+        {
+            consumers.Update(consumer);
+        }
+
         public void AddTicket(CommitTicket ticket)
         {
             tickets.Insert(ticket);
