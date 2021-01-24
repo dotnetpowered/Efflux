@@ -121,8 +121,15 @@ namespace Efflux.Stream
             }
             else
             {
-                startOffset = consumerTracker.CurrentOffset;
-                _logger.LogInformation($"[{TopicName}.{ConsumerName}] Recovered consumer with offset = {startOffset}");
+                if (startOffset > 0)
+                {
+                    _logger.LogInformation($"[{TopicName}.{ConsumerName}] Resuming at specified offset = {startOffset}");
+                }
+                else
+                {
+                    startOffset = consumerTracker.CurrentOffset;
+                    _logger.LogInformation($"[{TopicName}.{ConsumerName}] Recovered consumer with offset = {startOffset}");
+                }
             }
 
             var iter = log.Scan(startOffset, long.MaxValue); 
