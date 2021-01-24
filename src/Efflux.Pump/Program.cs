@@ -40,11 +40,11 @@ namespace Efflux.Pump
 
             var pullCommand = new Command("consume") {
                 new Option<string>(
-                    "--topic",
-                    description: "Topic to consume message from"),
+                    "--topic", 
+                    description: "Topic to consume message from") { IsRequired = true },
                 new Option<string>(
                     "--consumer",
-                    description: "Name of consumer"),
+                    description: "Name of consumer") { IsRequired = true },
             };
             rootCommand.AddCommand(pullCommand);
             pullCommand.Handler = CommandHandler.Create<string, string, bool>(async (topic, consumer, verbose) =>
@@ -54,7 +54,23 @@ namespace Efflux.Pump
                 await cmd.ConsumeMessage(topic, consumer, verbose);
             });
 
-      
+            var readCommand = new Command("read") {
+                new Option<string>(
+                    "--topic",
+                    description: "Topic to consume message from") { IsRequired = true },
+                new Option<string>(
+                    "--offset",
+                    description: "Offset of message") { IsRequired = true },
+            };
+            rootCommand.AddCommand(readCommand);
+            readCommand.Handler = CommandHandler.Create<string, long, bool>(async (topic, offset, verbose) =>
+            {
+                ServiceProvider serviceProvider = AddServices(verbose);
+                var cmd = serviceProvider.GetService<ReadCommand>();
+                await cmd.ReadMessage(topic, offset, verbose);
+            });
+
+
             // Parse the incoming args and invoke the handler
             return rootCommand.InvokeAsync(args).Result;
         }
@@ -71,6 +87,7 @@ namespace Efflux.Pump
                 .AddTransient<ITopicFactory, TopicStreamFactory>()
                 .AddSingleton<PublishCommand>()
                 .AddSingleton<ConsumeCommand>()
+                .AddSingleton<ReadCommand>()
                 .BuildServiceProvider();
         }
     }
