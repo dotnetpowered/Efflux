@@ -38,20 +38,27 @@ namespace Efflux.Pump
                 await cmd.PublishMessage(topic, arg1, verbose);
             });
 
-            var pullCommand = new Command("consume") {
+            var consumeCommand = new Command("consume") {
                 new Option<string>(
                     "--topic", 
                     description: "Topic to consume message from") { IsRequired = true },
                 new Option<string>(
                     "--consumer",
                     description: "Name of consumer") { IsRequired = true },
+                new Option<int>(
+                    "--count",
+                    description: "Number of messages to read",
+                    getDefaultValue:()=>1),
+                new Option<string>(
+                    "--offset",
+                    description: "Start offset for consumer (optional)"),
             };
-            rootCommand.AddCommand(pullCommand);
-            pullCommand.Handler = CommandHandler.Create<string, string, bool>(async (topic, consumer, verbose) =>
+            rootCommand.AddCommand(consumeCommand);
+            consumeCommand.Handler = CommandHandler.Create<string, string, int, int, bool>(async (topic, consumer, offset, count, verbose) =>
             {
                 ServiceProvider serviceProvider = AddServices(verbose);
                 var cmd = serviceProvider.GetService<ConsumeCommand>();
-                await cmd.ConsumeMessage(topic, consumer, verbose);
+                await cmd.ConsumeMessage(topic, consumer, offset, count, verbose);
             });
 
             var readCommand = new Command("read") {
